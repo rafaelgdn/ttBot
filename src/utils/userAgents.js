@@ -26,7 +26,6 @@ module.exports = [
   'Mozilla/5.0 (compatible; MSIE 10.0; Macintosh; Intel Mac OS X 10_7_3; pt-PTident/6.0)',
   'Mozilla/4.0 (Compatible; MSIE 8.0; Windows NT 5.2; pt-PTident/6.0)',
   'Mozilla/4.0 (compatible; MSIE 10.0; Windows NT 6.1; pt-PTident/5.0)',
-  'Mozilla/1.22 (compatible; MSIE 10.0; Windows 3.1)',
   'Mozilla/5.0 (Windows; U; MSIE 9.0; WIndows NT 9.0; pt-BR))',
   'Mozilla/5.0 (Windows; U; MSIE 9.0; Windows NT 9.0; pt-BR)',
   'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 7.1; pt-PTident/5.0)',
@@ -256,8 +255,6 @@ module.exports = [
   'Mozilla/2.0 (compatible; MSIE 3.0; Windows 95)',
   'Mozilla/2.0 (compatible; MSIE 3.0; Windows 3.1)',
   'Mozilla/4.0 (compatible; MSIE 2.0; Windows NT 5.0; pt-PTident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0)',
-  'Mozilla/1.22 (compatible; MSIE 2.0; Windows 95)',
-  'Mozilla/1.22 (compatible; MSIE 2.0; Windows 3.1)',
   // Chrome
   'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36',
   'Mozilla/5.0 (X11; Ubuntu; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2919.83 Safari/537.36',
