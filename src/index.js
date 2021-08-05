@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable no-plusplus */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-constant-condition */
 /* eslint-disable max-len */
@@ -8,7 +10,6 @@ const {
   userAgents,
   getRandomIntInclusive,
   handleActions,
-  // sleep,
 } = require('./utils');
 
 const {
@@ -38,8 +39,6 @@ const handleFinish = async (page, race, isMobile) => {
 
   await page.waitForSelector(race, { hidden: true, timeout: 70000 })
     .catch(async () => {
-      active -= 1;
-
       console.log(
         '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m',
         ' TIMEOUT ',
@@ -50,7 +49,6 @@ const handleFinish = async (page, race, isMobile) => {
       return false;
     });
 
-  active -= 1;
   currentViews += 1;
 
   console.log(
@@ -83,14 +81,12 @@ const handleMatureAccept = async (page, race) => {
 
   switch (secondRace) {
     case 1:
-      active -= 1;
       return false;
     case AdVideoAdCountdown:
     case AdSadOverlay:
     case AdVideoAdLabel:
       return handleFinish(page, secondRace);
     default:
-      active -= 1;
       return false;
   }
 };
@@ -120,7 +116,7 @@ const handleCookies = async (page, isMobile) => {
 
   switch (race) {
     case 1:
-      active -= 1;
+      // active -= 1;
       return false;
     case overlayMatureAccept:
     case mobileOverlayMatureAccept:
@@ -130,15 +126,13 @@ const handleCookies = async (page, isMobile) => {
     case AdVideoAdLabel:
       return handleFinish(page, race);
     default:
-      active -= 1;
+      // active -= 1;
       return false;
   }
 };
 
 const handlePage = async (page) => {
   try {
-    active += 1;
-
     const {
       overlayMatureAccept,
       mobileOverlayMatureAccept,
@@ -177,7 +171,7 @@ const handlePage = async (page) => {
 
     switch (race) {
       case 1:
-        active -= 1;
+        // active -= 1;
 
         console.log(
           '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m\n%s',
@@ -198,7 +192,7 @@ const handlePage = async (page) => {
       case AdVideoAdLabel:
         return handleFinish(page, race, isMobile);
       default:
-        active -= 1;
+        // active -= 1;
 
         console.log(
           '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m\n',
@@ -211,8 +205,6 @@ const handlePage = async (page) => {
         return false;
     }
   } catch (error) {
-    active -= 1;
-
     console.log(
       '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m\n\n\n%s',
       ' ERROR ',
@@ -225,24 +217,38 @@ const handlePage = async (page) => {
   }
 };
 
-(async () => {
-  let loop = true;
+const main = async () => {
   let browser;
 
-  while (loop) {
-    if (active < maxActive) {
-      browser = await puppeteer.launch({
-        headless: false,
-        executablePath: 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
-      });
-      const page = await browser.newPage();
-      await handlePage(page);
-      await browser.close();
-    }
+  try {
+    browser = await puppeteer.launch({
+      headless: false,
+      executablePath: 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
+    });
 
-    if (currentViews >= total) {
-      loop = false;
-      await browser.close();
-    }
+    const page = await browser.newPage();
+    await handlePage(page);
+    await browser.close();
+    active -= 1;
+  } catch (error) {
+    await browser.close();
+    active -= 1;
+    console.log(
+      '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m',
+      ' ERROR ',
+      ' Something unexpected happens.',
+    );
   }
-})();
+};
+
+const loop = async () => {
+  if (currentViews >= total) return null;
+
+  if (active < maxActive) {
+    active += 1;
+    main().then(() => loop()).catch(() => loop());
+    loop();
+  }
+};
+
+loop();
