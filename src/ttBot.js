@@ -1,14 +1,12 @@
 /* eslint-disable consistent-return */
-/* eslint-disable no-plusplus */
-/* eslint-disable no-await-in-loop */
-/* eslint-disable no-constant-condition */
-/* eslint-disable max-len */
 /* eslint-disable no-console */
+/* eslint-disable max-len */
 const puppeteer = require('puppeteer');
 
 const {
   userAgents,
   getRandomIntInclusive,
+  // handleActions,
 } = require('./utils');
 
 const {
@@ -33,7 +31,17 @@ const selectors = {
   AcceptCookies: '[data-a-target="consent-banner-accept"]',
 };
 
-const handleFinish = async (page, race) => {
+const setDomainLocalStorage = async (browser) => {
+  const page = await browser.newPage();
+  await page.setRequestInterception(true);
+  page.on('request', (r) => {
+    r.respond({
+      status: 200,
+      contentType: 'text/plain',
+      body: 'abc123',
+    });
+  });
+  await page.goto('https://www.twitch.tv/');
   await page.evaluate(() => {
     localStorage.setItem('mature', 'true');
     localStorage.setItem('video-muted', '{"default":false}');
@@ -41,6 +49,10 @@ const handleFinish = async (page, race) => {
     localStorage.setItem('video-quality', '{"default":"160p30"}');
   });
 
+  // await page.close();
+};
+
+const handleFinish = async (page, race) => {
   await page.waitForSelector(race, { hidden: true, timeout: 70000 })
     .catch(async () => {
       console.log(
@@ -65,46 +77,8 @@ const handleFinish = async (page, race) => {
   return true;
 };
 
-const handleMatureAccept = async (page, race) => {
+const handleCookies = async (page) => {
   const {
-    AdVideoAdCountdown,
-    AdSadOverlay,
-    AdVideoAdLabel,
-  } = selectors;
-
-  await page.evaluate((selector) => {
-    document.querySelector(selector).click();
-  }, race);
-
-  const secondRace = await Promise.race([
-    page.waitForTimeout(10000).then(() => 1),
-    page.waitForSelector(AdVideoAdCountdown).then(() => AdVideoAdCountdown),
-    page.waitForSelector(AdSadOverlay).then(() => AdSadOverlay),
-    page.waitForSelector(AdVideoAdLabel).then(() => AdVideoAdLabel),
-  ]);
-
-  switch (secondRace) {
-    case 1:
-      console.log(
-        '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m\n%s',
-        ' FAILED ',
-        ' Not found an AD, try again.',
-        userAgent,
-      );
-      return false;
-    case AdVideoAdCountdown:
-    case AdSadOverlay:
-    case AdVideoAdLabel:
-      return handleFinish(page, secondRace);
-    default:
-      return false;
-  }
-};
-
-const handleCookies = async (page, isMobile) => {
-  const {
-    mobileOverlayMatureAccept,
-    overlayMatureAccept,
     AcceptCookies,
     AdVideoAdCountdown,
     AdSadOverlay,
@@ -117,8 +91,6 @@ const handleCookies = async (page, isMobile) => {
 
   const race = await Promise.race([
     page.waitForTimeout(10000).then(() => 1),
-    page.waitForSelector(overlayMatureAccept).then(() => overlayMatureAccept),
-    page.waitForSelector(mobileOverlayMatureAccept).then(() => mobileOverlayMatureAccept),
     page.waitForSelector(AdSadOverlay).then(() => AdSadOverlay),
     page.waitForSelector(AdVideoAdCountdown).then(() => AdVideoAdCountdown),
     page.waitForSelector(AdVideoAdLabel).then(() => AdVideoAdLabel),
@@ -126,100 +98,61 @@ const handleCookies = async (page, isMobile) => {
 
   switch (race) {
     case 1:
-      // active -= 1;
       return false;
-    case overlayMatureAccept:
-    case mobileOverlayMatureAccept:
-      return handleMatureAccept(page, race, isMobile);
     case AdSadOverlay:
     case AdVideoAdCountdown:
     case AdVideoAdLabel:
       return handleFinish(page, race);
     default:
-      // active -= 1;
       return false;
   }
 };
 
 const handlePage = async (page) => {
-  try {
-    const {
-      overlayMatureAccept,
-      mobileOverlayMatureAccept,
-      AdVideoAdCountdown,
-      AdSadOverlay,
-      AdVideoAdLabel,
-      AcceptCookies,
-    } = selectors;
+  const {
+    AdVideoAdCountdown,
+    AdSadOverlay,
+    AdVideoAdLabel,
+    AcceptCookies,
+  } = selectors;
 
-    userAgent = userAgents[getRandomIntInclusive(0, userAgents.length)];
-    await page.setUserAgent(userAgent);
-    await page.goto(url);
+  userAgent = userAgents[getRandomIntInclusive(0, userAgents.length)];
+  await page.setUserAgent(userAgent);
+  await page.goto(url);
 
-    const isMobile = page.url().match(/m\.twitch.tv/);
+  const race = await Promise.race([
+    page.waitForTimeout(10000).then(() => 1),
+    page.waitForSelector(AcceptCookies).then(() => AcceptCookies),
+    page.waitForSelector(AdSadOverlay).then(() => AdSadOverlay),
+    page.waitForSelector(AdVideoAdCountdown).then(() => AdVideoAdCountdown),
+    page.waitForSelector(AdVideoAdLabel).then(() => AdVideoAdLabel),
+  ]);
 
-    if (isMobile) {
-      await page.setViewport({
-        width: 1366,
-        height: 768,
-      });
-    }
-
-    const race = await Promise.race([
-      page.waitForTimeout(10000).then(() => 1),
-      page.waitForSelector(AcceptCookies).then(() => AcceptCookies),
-      page.waitForSelector(overlayMatureAccept).then(() => overlayMatureAccept),
-      page.waitForSelector(mobileOverlayMatureAccept).then(() => mobileOverlayMatureAccept),
-      page.waitForSelector(AdSadOverlay).then(() => AdSadOverlay),
-      page.waitForSelector(AdVideoAdCountdown).then(() => AdVideoAdCountdown),
-      page.waitForSelector(AdVideoAdLabel).then(() => AdVideoAdLabel),
-    ]);
-
-    switch (race) {
-      case 1:
-        // active -= 1;
-
-        console.log(
-          '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m\n%s',
-          ' FAILED ',
-          ' Not found an AD, try again.',
-          userAgent,
-        );
-
-        await page.close();
-        return false;
-      case AcceptCookies:
-        return handleCookies(page, isMobile);
-      case overlayMatureAccept:
-      case mobileOverlayMatureAccept:
-        return handleMatureAccept(page, race, isMobile);
-      case AdSadOverlay:
-      case AdVideoAdCountdown:
-      case AdVideoAdLabel:
-        return handleFinish(page, race, isMobile);
-      default:
-        // active -= 1;
-
-        console.log(
-          '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m\n',
-          ' ERROR ',
-          ' Something unexpected happens.',
-          userAgent,
-        );
-
-        await page.close();
-        return false;
-    }
-  } catch (error) {
-    console.log(
-      '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m\n\n\n%s',
-      ' ERROR ',
-      ' Something unexpected happens.',
-      userAgent,
-      error,
-    );
-
-    return false;
+  switch (race) {
+    case 1:
+      console.log(
+        '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m\n%s',
+        ' FAILED ',
+        ' Not found an AD, try again.',
+        userAgent,
+      );
+      await page.close();
+      return false;
+    case AcceptCookies:
+      return handleCookies(page);
+    case AdSadOverlay:
+    case AdVideoAdCountdown:
+    case AdVideoAdLabel:
+      return handleFinish(page, race);
+    default:
+      console.log(
+        '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m\n',
+        ' ERROR ',
+        ' Something unexpected happens.',
+        userAgent,
+      );
+      await page.close();
+      return false;
   }
 };
 
@@ -231,7 +164,7 @@ const main = async () => {
       headless: false,
       executablePath: 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
     });
-
+    await setDomainLocalStorage(browser);
     const page = await browser.newPage();
     await handlePage(page);
     await browser.close();
