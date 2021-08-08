@@ -1,8 +1,8 @@
 {
-  "maxActive": 2,
+  "maxActive": 1,
   "totalAmount": 5,
   "CPM": 3.5,
   "urls": [
-    "https://www.twitch.tv/abbadammit"
+    "https://www.twitch.tv/kaxanga_br"
   ]
 }

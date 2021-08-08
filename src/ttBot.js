@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 /* eslint-disable max-len */
 const puppeteer = require('puppeteer');
+const { appendFileSync } = require('fs');
 
 const {
   userAgents,
@@ -17,7 +18,7 @@ const {
 } = require('./config.json');
 
 const url = urls[getRandomIntInclusive(0, urls.length - 1)];
-const total = (totalAmount * 1000) / CPM;
+const maxViews = (totalAmount * 1000) / CPM;
 let currentViews = 0;
 let active = 0;
 let userAgent;
@@ -29,6 +30,7 @@ const selectors = {
   AdSadOverlay: '[data-test-selector="sad-overlay"]',
   AdVideoAdLabel: '[data-a-target="video-ad-label"]',
   AcceptCookies: '[data-a-target="consent-banner-accept"]',
+  deprecatedBrowser: '[class*="deprecated-page"]',
 };
 
 const setDomainLocalStorage = async (browser) => {
@@ -38,7 +40,7 @@ const setDomainLocalStorage = async (browser) => {
     r.respond({
       status: 200,
       contentType: 'text/plain',
-      body: 'abc123',
+      body: '<htm',
     });
   });
   await page.goto('https://www.twitch.tv/');
@@ -49,12 +51,12 @@ const setDomainLocalStorage = async (browser) => {
     localStorage.setItem('video-quality', '{"default":"160p30"}');
   });
 
-  // await page.close();
+  await page.close();
 };
 
 const handleFinish = async (page, race) => {
   await page.waitForSelector(race, { hidden: true, timeout: 70000 })
-    .catch(async () => {
+    .catch(async (e) => {
       console.log(
         '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m',
         ' TIMEOUT ',
@@ -62,7 +64,7 @@ const handleFinish = async (page, race) => {
       );
 
       await page.close();
-      return false;
+      throw new Error(e);
     });
 
   currentViews += 1;
@@ -98,14 +100,33 @@ const handleCookies = async (page) => {
 
   switch (race) {
     case 1:
-      return false;
+      console.log(
+        '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m',
+        ' FAILED ',
+        ' Not found an AD, try again.',
+      );
+      throw new Error();
     case AdSadOverlay:
     case AdVideoAdCountdown:
     case AdVideoAdLabel:
       return handleFinish(page, race);
     default:
-      return false;
+      console.log(
+        '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m',
+        ' ERROR ',
+        ' Something unexpected happens.',
+      );
+      throw new Error();
   }
+};
+
+const handleDeprecated = () => {
+  console.log(
+    '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m',
+    ' DEPRECATED ',
+    ' The browser is deprecated, saving into txt.',
+  );
+  appendFileSync('deprecated.txt', `\n${userAgent}`);
 };
 
 const handlePage = async (page) => {
@@ -114,14 +135,16 @@ const handlePage = async (page) => {
     AdSadOverlay,
     AdVideoAdLabel,
     AcceptCookies,
+    deprecatedBrowser,
   } = selectors;
 
-  userAgent = userAgents[getRandomIntInclusive(0, userAgents.length)];
+  userAgent = userAgents[getRandomIntInclusive(0, userAgents.length - 1)];
   await page.setUserAgent(userAgent);
   await page.goto(url);
 
   const race = await Promise.race([
     page.waitForTimeout(10000).then(() => 1),
+    page.waitForSelector(deprecatedBrowser).then(() => deprecatedBrowser),
     page.waitForSelector(AcceptCookies).then(() => AcceptCookies),
     page.waitForSelector(AdSadOverlay).then(() => AdSadOverlay),
     page.waitForSelector(AdVideoAdCountdown).then(() => AdVideoAdCountdown),
@@ -131,13 +154,15 @@ const handlePage = async (page) => {
   switch (race) {
     case 1:
       console.log(
-        '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m\n%s',
+        '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m',
         ' FAILED ',
         ' Not found an AD, try again.',
-        userAgent,
       );
       await page.close();
-      return false;
+      throw new Error();
+    case deprecatedBrowser:
+      handleDeprecated();
+      throw new Error();
     case AcceptCookies:
       return handleCookies(page);
     case AdSadOverlay:
@@ -146,13 +171,12 @@ const handlePage = async (page) => {
       return handleFinish(page, race);
     default:
       console.log(
-        '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m\n',
+        '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m',
         ' ERROR ',
         ' Something unexpected happens.',
-        userAgent,
       );
       await page.close();
-      return false;
+      throw new Error();
   }
 };
 
@@ -168,24 +192,27 @@ const main = async () => {
     const page = await browser.newPage();
     await handlePage(page);
     await browser.close();
-    active -= 1;
   } catch (error) {
     await browser.close();
-    active -= 1;
-    console.log(
-      '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m',
-      ' ERROR ',
-      ' Something unexpected happens.',
-    );
   }
 };
 
 const loop = async () => {
-  if (currentViews >= total) return null;
+  if (currentViews >= maxViews) return;
 
   if (active < maxActive) {
     active += 1;
-    main().then(() => loop()).catch(() => loop());
+
+    main()
+      .then(() => {
+        active -= 1;
+        loop();
+      })
+      .catch(() => {
+        active -= 1;
+        loop();
+      });
+
     loop();
   }
 };
