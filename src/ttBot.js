@@ -29,7 +29,8 @@ const selectors = {
   AdVideoAdCountdown: '[data-a-target="video-ad-countdown"]',
   AdSadOverlay: '[data-test-selector="sad-overlay"]',
   AdVideoAdLabel: '[data-a-target="video-ad-label"]',
-  AcceptCookies: '[data-a-target="consent-banner-accept"]',
+  AcceptCookies: '[class*="consent-banner"]',
+  AcceptCookiesButton: '[data-a-target="consent-banner-accept"]',
   deprecatedBrowser: '[class*="deprecated-page"]',
 };
 
@@ -59,7 +60,7 @@ const handleFinish = async (page, race) => {
     .catch(async (e) => {
       console.log(
         '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m',
-        ' TIMEOUT ',
+        ' TIMEOUT    ',
         ' The task timed out',
       );
 
@@ -71,7 +72,7 @@ const handleFinish = async (page, race) => {
 
   console.log(
     '\x1b[42m\x1b[30m%s\x1b[0m\x1b[32m%s\x1b[0m',
-    ' SUCCESS ',
+    ' SUCCESS    ',
     ` Found an AD, Current views (${currentViews})`,
   );
 
@@ -81,7 +82,7 @@ const handleFinish = async (page, race) => {
 
 const handleCookies = async (page) => {
   const {
-    AcceptCookies,
+    AcceptCookiesButton,
     AdVideoAdCountdown,
     AdSadOverlay,
     AdVideoAdLabel,
@@ -89,7 +90,7 @@ const handleCookies = async (page) => {
 
   await page.evaluate((selector) => {
     document.querySelector(selector).click();
-  }, AcceptCookies);
+  }, AcceptCookiesButton);
 
   const race = await Promise.race([
     page.waitForTimeout(10000).then(() => 1),
@@ -102,7 +103,7 @@ const handleCookies = async (page) => {
     case 1:
       console.log(
         '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m',
-        ' FAILED ',
+        ' FAILED     ',
         ' Not found an AD, try again.',
       );
       throw new Error();
@@ -113,7 +114,7 @@ const handleCookies = async (page) => {
     default:
       console.log(
         '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m',
-        ' ERROR ',
+        ' ERROR      ',
         ' Something unexpected happens.',
       );
       throw new Error();
@@ -155,7 +156,7 @@ const handlePage = async (page) => {
     case 1:
       console.log(
         '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m',
-        ' FAILED ',
+        ' FAILED     ',
         ' Not found an AD, try again.',
       );
       await page.close();
@@ -172,7 +173,7 @@ const handlePage = async (page) => {
     default:
       console.log(
         '\x1b[41m\x1b[30m%s\x1b[0m\x1b[31m%s\x1b[0m',
-        ' ERROR ',
+        ' ERROR      ',
         ' Something unexpected happens.',
       );
       await page.close();
