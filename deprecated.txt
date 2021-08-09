@@ -1,2 +1,25 @@
 
 Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.1; pt-PTident/4.0; GTB7.4; InfoPath.2; pt-PT1; .NET CLR 3.3.69573; WOW64; pt-BR)
+Mozilla/5.0 (Windows; U; MSIE 9.0; Windows NT 9.0; pt-BR)
+Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.0; pt-PTident/4.0; WOW64; pt-PTident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 1.0.3705; .NET CLR 1.1.4322)
+Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_4; pt-BR) AppleWebKit/528.4+ (KHTML, like Gecko) Version/4.0dp1 Safari/526.11.2
+Mozilla/4.79 [en] (compatible; MSIE 7.0; Windows NT 5.0; .NET CLR 2.0.50727; InfoPath.2; .NET CLR 1.1.4322; .NET CLR 3.0.04506.30; .NET CLR 3.0.04506.648)
+Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 7.1; pt-PTident/5.0)
+Mozilla/5.0 (Windows NT 5.0; rv:21.0) Gecko/20100101 Firefox/21.0
+Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; pt-PTident/6.0)
+Mozilla/5.0 (compatible; MSIE 7.0; Windows NT 6.0; pt-BR)
+Mozilla/5.0 (Windows; U; MSIE 9.0; WIndows NT 9.0; pt-BR))
+Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 7.1; pt-PTident/5.0)
+Mozilla/5.0 (Windows; U; Windows NT 5.1; fa; rv:1.9.1.7) Gecko/20091221 Firefox/3.5.7
+Mozilla/5.0 (compatible; MSIE 6.0; Windows NT 5.1)
+Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.0; pt-PTident/4.0; WOW64; pt-PTident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; .NET CLR 1.0.3705; .NET CLR 1.1.4322)
+Mozilla/5.0 (Macintosh; U; PPC Mac OS X 10.4; pt-BR; rv:1.9.2.22) Gecko/20110902 Firefox/3.6.22
+Mozilla/5.0 (X11; U; Linux i686; pt-BR; rv:1.8.1.3) Gecko/20070410 Firefox/2.0.0.3
+Mozilla/5.0 (Windows; U; Windows NT 6.1; pt-BR) AppleWebKit/533+ (KHTML, like Gecko)
+Mozilla/5.0 (compatible; MSIE 7.0; Windows NT 6.0; pt-BR)
+Mozilla/6.0 (Windows; U; Windows NT 7.0; pt-BR; rv:1.9.0.8) Gecko/2009032609 Firefox/3.0.9 (.NET CLR 3.5.30729)
+Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 5.2)
+Mozilla/5.0 (MSIE 7.0; Macintosh; U; SunOS; X11; gu; pt-PT1; InfoPath.2; .NET CLR 3.0.04506.30; .NET CLR 3.0.04506.648)
+Mozilla/5.0 (Macintosh; U; PPC Mac OS X; pt-BR) AppleWebKit/417.9 (KHTML, like Gecko)
+Mozilla/3.0 (compatible; MSIE 3.0; Windows NT 5.0)
+Mozilla/2.0 (compatible; MSIE 4.0; Windows 98)
