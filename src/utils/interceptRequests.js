@@ -39,32 +39,36 @@ const skippedResources = [
 ];
 
 const removeUnnecessaryContent = async (page) => {
-  const client = await page.target().createCDPSession();
+  try {
+    const client = await page.target().createCDPSession();
 
-  await client.send('Network.enable');
-  await client.send('Network.setRequestInterception', {
-    patterns: [{
-      urlPattern: '*',
-    }],
-  });
+    await client.send('Network.enable');
+    await client.send('Network.setRequestInterception', {
+      patterns: [{
+        urlPattern: '*',
+      }],
+    });
 
-  client.on('Network.requestIntercepted', async ({
-    interceptionId,
-    request,
-    resourceType,
-  }) => {
-    const continueParams = { interceptionId };
-    const requestUrl = request.url.split('?')[0].split('#')[0];
+    client.on('Network.requestIntercepted', async ({
+      interceptionId,
+      request,
+      resourceType,
+    }) => {
+      const continueParams = { interceptionId };
+      const requestUrl = request.url.split('?')[0].split('#')[0];
 
-    if (
-      blockedResourceTypes.indexOf(resourceType) !== -1
+      if (
+        blockedResourceTypes.indexOf(resourceType) !== -1
       || skippedResources.some((resource) => requestUrl.indexOf(resource) !== -1)
-    ) {
-      continueParams.errorReason = 'AddressUnreachable';
-    }
+      ) {
+        continueParams.errorReason = 'AddressUnreachable';
+      }
 
-    client.send('Network.continueInterceptedRequest', continueParams);
-  });
+      client.send('Network.continueInterceptedRequest', continueParams);
+    });
+  } catch (error) {
+    throw new Error();
+  }
 };
 
 const setDomainLocalStorage = async (browser) => {

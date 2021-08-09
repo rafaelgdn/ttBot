@@ -1,8 +1,23 @@
 {
-  "maxActive": 10,
+  "maxActive": 15,
   "totalAmount": 5,
   "CPM": 3.5,
   "urls": [
-    "https://www.twitch.tv/faah"
+    "https://www.twitch.tv/videos/1112366322",
+    "https://www.twitch.tv/videos/1110504604",
+    "https://www.twitch.tv/videos/1107210047",
+    "https://www.twitch.tv/dgzaofps",
+    "https://www.twitch.tv/dgzaofps",
+    "https://www.twitch.tv/dgzaofps",
+    "https://www.twitch.tv/dgzaofps",
+    "https://www.twitch.tv/dgzaofps",
+    "https://www.twitch.tv/dgzaofps",
+    "https://www.twitch.tv/dgzaofps",
+    "https://www.twitch.tv/dgzaofps",
+    "https://www.twitch.tv/dgzaofps",
+    "https://www.twitch.tv/dgzaofps",
+    "https://www.twitch.tv/dgzaofps",
+    "https://www.twitch.tv/dgzaofps",
+    "https://www.twitch.tv/dgzaofps"
   ]
 }

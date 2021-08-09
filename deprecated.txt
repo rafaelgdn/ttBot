@@ -26,3 +26,35 @@ Mozilla/2.0 (compatible; MSIE 4.0; Windows 98)
 Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; pt-PTident/5.0
 Mozilla/5.0 (Windows NT 5.2) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.792.0 Safari/535.1
 Mozilla/45.0 (compatible; MSIE 6.0; Windows NT 5.1)
+Mozilla/5.0 (compatible; MSIE 7.0; Windows NT 6.0; SLCC1; .NET CLR 2.0.50727; Media Center PC 5.0; c .NET CLR 3.0.04506; .NET CLR 3.5.30707; InfoPath.1; pt-BR)
+Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; pt-PTident/5.0; chromeframe/11.0.696.57)
+Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 5.2)
+Mozilla/5.0 (X11; U; Linux i686; pt-BR; rv:1.9.0.2) Gecko/2008092318 Fedora/3.0.2-1.fc9 Firefox/3.0.2
+Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; pt-PTident/5.0; chromeframe/13.0.782.215)
+Mozilla/5.0 (X11; U; Linux i686; pt-BR; rv:1.9.0.11) Gecko/2009062218 Gentoo Firefox/3.0.11
+Mozilla/5.0 ArchLinux (X11; U; Linux x86_64; pt-BR) AppleWebKit/534.30 (KHTML, like Gecko) Chrome/12.0.742.100
+Mozilla/2.0 (compatible; MSIE 3.02; Windows 3.1)
+Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; pt-PTident/5.0; chromeframe/13.0.782.215)
+Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; pt-PTident/5.0
+Mozilla/5.0 (Windows; U; MSIE 6.0; Windows NT 5.1; pt-PT1; .NET CLR 2.0.50727)
+Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 5.1; pt-PTident/4.0; SLCC1; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET CLR 1.1.4322)
+Mozilla/5.0 (X11; U; Linux i686; pt-BR; rv:1.8.0.4) Gecko/20060608 Ubuntu/dapper-security Firefox/1.5.0.4
+Mozilla/5.0 (X11; U; Linux x86_64) Gecko/2008072820 Firefox/3.0.1
+Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 5.1; pt-PTident/4.0; InfoPath.2; SLCC1; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; .NET CLR 2.0.50727)
+Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; pt-PTident/5.0; .NET CLR 2.0.50727; SLCC2; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; Zune 4.0; Tablet PC 2.0; InfoPath.3; .NET4.0C; .NET4.0E)
+Mozilla/5.0 (Macintosh; U; PPC Mac OS X; pt-BR) AppleWebKit/523.10.3 (KHTML, like Gecko) Version/3.0.4 Safari/523.10
+Mozilla/5.0 (Windows; U; Win98; rv:1.7.3) Gecko/20041001 Firefox/0.10.1
+Mozilla/5.0 (X11; U; Linux i686; pt-BR; rv:1.8.0.7) Gecko/20060914 Firefox/1.5.0.7 (Swiftfox) Mnenhy/0.7.4.666
+Mozilla/5.0 (Windows; U; Windows NT 6.1; pt-BR) AppleWebKit/532.5 (KHTML, like Gecko) Chrome/4.1.249.1025 Safari/532.5
+Mozilla/5.0 (Windows; U; MSIE 6.0; Windows NT 5.1; pt-PT1; .NET CLR 2.0.50727)
+Mozilla/5.0 (compatible; MSIE 7.0; Windows NT 5.2; WOW64; .NET CLR 2.0.50727)
+Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; pt-PTident/4.0; GTB7.4; InfoPath.1; pt-PT1; .NET CLR 2.8.52393; WOW64; pt-BR)
+Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.1; pt-PTident/5.0)
+Mozilla/5.0 (compatible; MSIE 7.0; Windows NT 5.0; pt-PTident/4.0; FBSMTWB; .NET CLR 2.0.34861; .NET CLR 3.0.3746.3218; .NET CLR 3.5.33652; msn OptimizedIE8;ENUS)
+Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_2_1 like Mac OS X; pt-BR) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5
+Mozilla/2.0 (compatible; MSIE 3.0; Windows 3.1)
+Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 7.1; pt-PTident/5.0)
+Mozilla/3.0 (compatible; MSIE 3.0; Windows NT 5.0)
+Mozilla/5.0 (X11; U; Linux x86_64; pt-BR; rv:1.7.12) Gecko/20051218 Firefox/1.0.7
+Mozilla/5.0 (Windows; U; Windows NT 6.1; pt-BR; rv:1.8.1.20) Gecko/20081217 Firefox/2.0.0.20
+Opera/8.51 (Windows 98; U; pt-BR)

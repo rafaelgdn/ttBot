@@ -5,7 +5,7 @@ const puppeteer = require('puppeteer-extra');
 const request = require('request');
 const { promisify } = require('util');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
-const treekill = require('tree-kill');
+// const treekill = require('tree-kill');
 const handlePage = require('./functions/handlePage');
 
 const {
@@ -68,10 +68,10 @@ const main = async () => {
       ` Found an AD, Current views (${currentViews})`,
     );
 
-    treekill(chrome.pid, 'SIGKILL');
+    // treekill(chrome.pid, 'SIGKILL');
     await chrome.kill();
   } catch (error) {
-    treekill(chrome.pid, 'SIGKILL');
+    // treekill(chrome.pid, 'SIGKILL');
     await chrome.kill();
   }
 };
