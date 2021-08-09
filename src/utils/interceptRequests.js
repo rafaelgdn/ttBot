@@ -38,8 +38,7 @@ const skippedResources = [
   'tiqcdn',
 ];
 
-const removeUnnecessaryContent = async (browser) => {
-  const page = await browser.newPage();
+const removeUnnecessaryContent = async (page) => {
   const client = await page.target().createCDPSession();
 
   await client.send('Network.enable');
@@ -54,21 +53,18 @@ const removeUnnecessaryContent = async (browser) => {
     request,
     resourceType,
   }) => {
-    // const requestUrl = request.url.split('?')[0].split('#')[0];
+    const continueParams = { interceptionId };
+    const requestUrl = request.url.split('?')[0].split('#')[0];
 
-    // if (
-    //   blockedResourceTypes.indexOf(resourceType) !== -1
-    //   || skippedResources.some((resource) => requestUrl.indexOf(resource) !== -1)
-    // )  {
-    //   // client.send('Network.setBlockedURLs', { urls: [request.url] });
-    // } else {
-    client.send('Network.continueInterceptedRequest', {
-      interceptionId,
-    });
-    // }
+    if (
+      blockedResourceTypes.indexOf(resourceType) !== -1
+      || skippedResources.some((resource) => requestUrl.indexOf(resource) !== -1)
+    ) {
+      continueParams.errorReason = 'AddressUnreachable';
+    }
+
+    client.send('Network.continueInterceptedRequest', continueParams);
   });
-
-  return page;
 };
 
 const setDomainLocalStorage = async (browser) => {

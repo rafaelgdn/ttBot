@@ -1,5 +1,5 @@
 {
-  "maxActive": 1,
+  "maxActive": 10,
   "totalAmount": 5,
   "CPM": 3.5,
   "urls": [
