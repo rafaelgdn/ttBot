@@ -1,0 +1,45 @@
+const blockedResourceTypes = [
+  'Svg',
+  'svg',
+  'Image',
+  'image',
+  'Font',
+  'Texttrack',
+  'Object',
+  'Beacon',
+  'Csp_report',
+  'Imageset',
+  'font',
+  'texttrack',
+  'object',
+  'beacon',
+  'csp_report',
+  'imageset',
+];
+
+const skippedResources = [
+  'quantserve',
+  'adzerk',
+  'doubleclick',
+  'adition',
+  'exelator',
+  'sharethrough',
+  'cdn.api.twitter',
+  'google-analytics',
+  'googletagmanager',
+  'google',
+  'fontawesome',
+  'facebook',
+  'analytics',
+  'optimizely',
+  'clicktale',
+  'mixpanel',
+  'zedo',
+  'clicksor',
+  'tiqcdn',
+];
+
+module.exports = {
+  skippedResources,
+  blockedResourceTypes,
+};

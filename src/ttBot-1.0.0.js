@@ -65,7 +65,7 @@ const main = async () => {
     console.log(
       '\x1b[42m\x1b[30m%s\x1b[0m\x1b[32m%s\x1b[0m',
       ' SUCCESS    ',
-      ` Found an AD, Current views (${currentViews})`,
+      ` Found an AD! Views (${currentViews}), Actives (${active})`,
     );
 
     // treekill(chrome.pid, 'SIGKILL');

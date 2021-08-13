@@ -3,7 +3,6 @@
 const chromeLauncher = require('chrome-launcher');
 const puppeteer = require('puppeteer-extra');
 const request = require('request');
-const os = require('os-utils');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 
 const {
@@ -17,7 +16,7 @@ const {
 const {
   userAgents,
   getRandomIntInclusive,
-  sleep,
+  // sleep,
 } = require('./src/utils');
 
 const {
@@ -74,7 +73,7 @@ const url = urls[getRandomIntInclusive(0, urls.length - 1)];
 const maxViews = (totalAmount * 1000) / CPM;
 let currentViews = 0;
 let active = 0;
-let delay = 0;
+// let delay = 0
 
 const main = async () => {
   let browser;
@@ -84,25 +83,51 @@ const main = async () => {
   let userAgent;
 
   try {
-    chrome = await chromeLauncher.launch({
-      chromeFlags: [
-        '--headless',
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--disable-accelerated-2d-canvas',
-        '--no-first-run',
-        '--no-zygote',
-        '--disable-gpu',
+    // chrome = await chromeLauncher.launch({
+    //   chromeFlags: [
+    //     // '--headless',
+    // '--no-sandbox',
+    // '--disable-setuid-sandbox',
+    // '--disable-dev-shm-usage',
+    // '--disable-accelerated-2d-canvas',
+    // '--no-first-run',
+    // '--no-zygote',
+    // '--disable-gpu',
+    // '--disk-cache-size=1',
+    // '--disable-gpu-program-cache',
+    // '--disable-gpu-shader-disk-cache',
+    // '--disable-component-update',
+    // '--disable-features=GpuProcessHighPriorityWin,GpuUseDisplayThreadPriority',
+    // '--enable-features=UserAgentClientHint',
+    //   ],
+    //   logLevel: 'silent',
+    //   output: 'json',
+    // });
+
+    // const resp = await promisify(request)(`http://localhost:${chrome.port}/json/version`);
+    // const { webSocketDebuggerUrl } = JSON.parse(resp.body);
+
+    // browser = await puppeteer.connect({ browserWSEndpoint: webSocketDebuggerUrl });
+    browser = await puppeteer.launch({
+      headless: false,
+      executablePath: 'C:/Users/User/Desktop/Twitch/Worker/chrome/worker.exe',
+      args: [
+        // '--no-sandbox',
+        // '--disable-setuid-sandbox',
+        // '--disable-dev-shm-usage',
+        // '--disable-accelerated-2d-canvas',
+        // '--no-first-run',
+        // '--no-zygote',
+        // '--disable-gpu',
+        '--disk-cache-size=1',
+        '--disable-gpu-program-cache',
+        '--disable-gpu-shader-disk-cache',
+        '--disable-component-update',
+        '--disable-features=GpuProcessHighPriorityWin,GpuUseDisplayThreadPriority',
+        '--enable-features=UserAgentClientHint',
       ],
-      logLevel: 'silent',
-      output: 'json',
     });
 
-    const resp = await promisify(request)(`http://localhost:${chrome.port}/json/version`);
-    const { webSocketDebuggerUrl } = JSON.parse(resp.body);
-
-    browser = await puppeteer.connect({ browserWSEndpoint: webSocketDebuggerUrl });
     [page] = await browser.pages();
     client = await page.target().createCDPSession();
 
@@ -155,7 +180,6 @@ const main = async () => {
     await page.goto(url);
     await page.waitForSelector(AdSadOverlay, { timeout: 10000 });
     await page.waitForSelector(AdSadOverlay, { hidden: true, timeout: 181000 });
-    await page.close();
 
     currentViews += 1;
 
@@ -180,7 +204,6 @@ const main = async () => {
     }
 
     if (client) await client.detach();
-    if (page) await page.close();
     if (chrome) await chrome.kill();
     if (browser) await browser.close();
   }
@@ -190,35 +213,21 @@ const loop = async () => {
   if (currentViews >= maxViews) return;
 
   if (active < maxActive) {
-    await sleep(delay);
-    delay = getRandomIntInclusive(1000, 5000);
+    active += 1;
 
-    os.cpuUsage(async (value) => {
-      if (value > 0.3) {
-        // console.log(
-        //   '\x1b[103m\x1b[30m%s\x1b[0m\x1b[93m%s\x1b[0m',
-        //   '   STAND BY  ',
-        //   ` Active: [${active}] Views: [${currentViews}] - Waiting to decrease CPU usage.`,
-        // );
-        const sleepTime = getRandomIntInclusive(10000, 20000);
-        await sleep(sleepTime);
+    main()
+      .then(() => {
+        console.log('then main');
+        active -= 1;
         loop();
-      } else {
-        active += 1;
-
-        main()
-          .then(() => {
-            active -= 1;
-            loop();
-          })
-          .catch(() => {
-            active -= 1;
-            loop();
-          });
-
+      })
+      .catch(() => {
+        console.log('catch main');
+        active -= 1;
         loop();
-      }
-    });
+      });
+
+    loop();
   }
 };
 
