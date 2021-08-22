@@ -42,6 +42,7 @@ const maxViews = (totalAmount * 1000) / CPM;
     puppeteer,
     puppeteerOptions: {
       headless: true,
+      executablePath: '/usr/bin/google-chrome-stable',
       // executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',
       // executablePath: 'C:/Users/User/Desktop/Twitch/Chromium/bin/chrome.exe',
       // headless: true,
