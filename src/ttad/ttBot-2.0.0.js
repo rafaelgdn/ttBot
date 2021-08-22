@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
-const { Cluster } = require('puppeteer-cluster');
+const { Cluster } = require('../cluster/dist/index');
+const { Webhook } = require('discord-webhook-node')
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 
@@ -27,6 +28,8 @@ const {
   sleep,
 } = require('../utils');
 
+const hook = new Webhook('https://discordapp.com/api/webhooks/879032127767859220/bFUJlGkVwp6KxcFw4NTM-IAmmVd5qedJrdoKOaKBz1Td6iRwRek7vIQ6yW4pT2JiZcfJ')
+
 const url = urls[getRandomIntInclusive(0, urls.length - 1)];
 const maxViews = (totalAmount * 1000) / CPM;
 
@@ -34,11 +37,11 @@ const maxViews = (totalAmount * 1000) / CPM;
   const cluster = await Cluster.launch({
     concurrency: Cluster.CONCURRENCY_CONTEXT,
     maxConcurrency: concurrency,
-    workerCreationDelay: 5000,
-    sameDomainDelay: 3000,
+    // workerCreationDelay: 5000,
+    sameDomainDelay: 2000,
     timeout: 200000,
     retryLimit: 1000,
-    monitor: true,
+    monitor: false,
     puppeteer,
     puppeteerOptions: {
       headless: true,
@@ -139,6 +142,11 @@ const maxViews = (totalAmount * 1000) / CPM;
     cluster.queue(url);
     alreadyQueued += 1;
   }
+
+  setInterval(() => {
+    cluster.monitor()
+    hook.send(cluster.webhookMsg);
+  }, 60 * 1000);
 
   await cluster.idle();
   await cluster.close();
