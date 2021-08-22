@@ -16,7 +16,7 @@ const {
 } = require('./utils');
 
 const {
-  maxActive,
+  concurrency,
   totalAmount,
   CPM,
   urls,
@@ -37,7 +37,7 @@ const main = async () => {
   try {
     chrome = await chromeLauncher.launch({
       chromeFlags: [
-        '--headless',
+        // '--headless',
         '--no-sandbox',
         '--disable-setuid-sandbox',
         '--disable-dev-shm-usage',
@@ -79,7 +79,7 @@ const main = async () => {
 const loop = async () => {
   if (currentViews >= maxViews) return;
 
-  if (active < maxActive) {
+  if (active < concurrency) {
     active += 1;
 
     main()
