@@ -46,7 +46,7 @@ const maxViews = (totalAmount * 1000) / CPM;
     puppeteer,
     puppeteerOptions: {
       headless: true,
-      executablePath: '/home/ubuntu/ttBot/ungoogled-chromium_92.0.4515.159_1.vaapi_linux/chrome',
+      executablePath: '/home/ubuntu/ttBot/ungoogled-chromium_86.0.4240.111_1.vaapi_linux/chrome',
       // executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',
       // executablePath: 'C:/Users/User/Desktop/Twitch/Chromium/bin/chrome.exe',
       // headless: true,
