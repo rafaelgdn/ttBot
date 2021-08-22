@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
-const { Cluster } = require('../cluster/dist/index');
+// const { Cluster } = require('../cluster/dist/index');
+const { Cluster } = require('puppeteer-cluster')
 const { Webhook } = require('discord-webhook-node')
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
@@ -41,7 +42,7 @@ const maxViews = (totalAmount * 1000) / CPM;
     sameDomainDelay: 2000,
     timeout: 200000,
     retryLimit: 1000,
-    monitor: false,
+    monitor: true,
     puppeteer,
     puppeteerOptions: {
       headless: true,
