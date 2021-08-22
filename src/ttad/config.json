@@ -1,8 +1,11 @@
 {
-  "concurrency": 10,
+  "concurrency": 20,
   "totalAmount": 100,
   "CPM": 3.5,
   "urls": [
-    "https://www.twitch.tv/teteotv"
+    "https://www.twitch.tv/videos/1125711724",
+    "https://www.twitch.tv/videos/1125191521",
+    "https://www.twitch.tv/videos/1123484607",
+    "https://www.twitch.tv/videos/1122991655"
   ]
 }
