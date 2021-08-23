@@ -1,6 +1,6 @@
 {
-  "concurrency": 2,
-  "totalAmount": 1,
+  "concurrency": 10,
+  "totalAmount": 10,
   "CPM": 3.5,
   "urls": [
     "https://www.twitch.tv/dgzaofps"
