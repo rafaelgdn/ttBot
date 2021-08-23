@@ -29,8 +29,6 @@ const {
   sleep,
 } = require('../utils');
 
-const hook = new Webhook('https://discordapp.com/api/webhooks/879032127767859220/bFUJlGkVwp6KxcFw4NTM-IAmmVd5qedJrdoKOaKBz1Td6iRwRek7vIQ6yW4pT2JiZcfJ')
-
 // const url = urls[getRandomIntInclusive(0, urls.length - 1)];
 const maxViews = (totalAmount * 1000) / CPM;
 
@@ -120,17 +118,17 @@ const getUrl = () => {
     // /////////////////////////////////////////////////
     console.log('\n\n\n\n55555555555555555551\n\n\n')
     await page.goto(uri);
-    console.log('\n\n\n\n66666666666666666666\n\n\n')
+    console.log('\nWaiting for selector\n')
     await page.waitForSelector(AdSadOverlay, { timeout: 10000 });
-    console.log('\n\n\n\n777777777777777777777\n\n\n')
+    console.log('\nFound selector\n')
     await page.waitForSelector(AdSadOverlay, { hidden: true, timeout: 181000 });
-    console.log('\n\n\n\n888888888888888888888888888888\n\n\n')
+    console.log('\nWainting selector disapear\n')
 
     await sleep(
       getRandomIntInclusive(3000, 5000),
     );
 
-    console.log('\n\n\n\n\n\nSUCCESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS\n\n\n\n\n')
+    console.log('\nSUCCESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS\n')
 
     await page.close();
   });
@@ -144,6 +142,7 @@ const getUrl = () => {
 
   setInterval(() => {
     cluster.monitor()
+    const hook = new Webhook('https://discordapp.com/api/webhooks/879032127767859220/bFUJlGkVwp6KxcFw4NTM-IAmmVd5qedJrdoKOaKBz1Td6iRwRek7vIQ6yW4pT2JiZcfJ')
     hook.send(cluster.webhookMsg);
   }, 60 * 1000);
 
