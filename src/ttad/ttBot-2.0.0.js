@@ -161,7 +161,7 @@ const getUrl = () => {
   setInterval(() => {
     cluster.monitor()
     hook.send(cluster.webhookMsg);
-  }, 60 * 1000);
+  }, 60 * 60 * 1000);
 
   await cluster.idle();
   await cluster.close();

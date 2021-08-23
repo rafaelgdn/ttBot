@@ -380,7 +380,7 @@ class Cluster extends events_1.EventEmitter {
         const pagesPerSecond = doneTargets === 0 ?
             '0' : (doneTargets * 1000 / timeDiff).toFixed(2);
         // display.log(`== Start:     ${util.formatDateTime(this.startTime)}`);
-        this.webhookMsg = '\n\n**Oracle instance**\n';
+        this.webhookMsg = '\n\n**Oracle E2 instance**\n';
         this.webhookMsg += '```\n';
         this.webhookMsg += `== Start:     ${util.formatDateTime(this.startTime)}\n`;
         // display.log(`== Now:       ${util.formatDateTime(now)} (running for ${timeRunning})`);
