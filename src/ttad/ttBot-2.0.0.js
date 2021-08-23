@@ -57,7 +57,7 @@ const getUrl = () => {
     puppeteer,
     puppeteerOptions: {
       headless: true,
-      executablePath: '/usr/bin/google-chrome',
+      executablePath: '/usr/bin/google-chrome-stable',
       // executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',
       // executablePath: 'C:/Users/User/Desktop/Twitch/Chromium/bin/chrome.exe',
       // headless: true,
@@ -135,11 +135,11 @@ const getUrl = () => {
     alreadyQueued += 1;
   }
 
-  setInterval(() => {
-    cluster.monitor()
-    const hook = new Webhook('https://discordapp.com/api/webhooks/879032127767859220/bFUJlGkVwp6KxcFw4NTM-IAmmVd5qedJrdoKOaKBz1Td6iRwRek7vIQ6yW4pT2JiZcfJ')
-    hook.send(cluster.webhookMsg);
-  }, 60 * 1000);
+  // setInterval(() => {
+  //   cluster.monitor()
+  //   // const hook = new Webhook('https://discordapp.com/api/webhooks/879032127767859220/bFUJlGkVwp6KxcFw4NTM-IAmmVd5qedJrdoKOaKBz1Td6iRwRek7vIQ6yW4pT2JiZcfJ')
+  //   // hook.send(cluster.webhookMsg);
+  // }, 60 * 1000);
 
   await cluster.idle();
   await cluster.close();
