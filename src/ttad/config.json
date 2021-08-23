@@ -1,8 +1,19 @@
 {
-  "concurrency": 20,
-  "totalAmount": 100,
+  "concurrency": 2,
+  "totalAmount": 1,
   "CPM": 3.5,
   "urls": [
+    "https://www.twitch.tv/dgzaofps",
+    "https://www.twitch.tv/dgzaofps",
+    "https://www.twitch.tv/dgzaofps",
+    "https://www.twitch.tv/dgzaofps",
+    "https://www.twitch.tv/dgzaofps",
+    "https://www.twitch.tv/dgzaofps",
+    "https://www.twitch.tv/dgzaofps",
+    "https://www.twitch.tv/dgzaofps",
+    "https://www.twitch.tv/dgzaofps",
+    "https://www.twitch.tv/dgzaofps",
+    "https://www.twitch.tv/dgzaofps",
     "https://www.twitch.tv/dgzaofps"
   ]
 }

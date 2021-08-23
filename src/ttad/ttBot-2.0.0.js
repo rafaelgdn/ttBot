@@ -31,8 +31,21 @@ const {
 
 const hook = new Webhook('https://discordapp.com/api/webhooks/879032127767859220/bFUJlGkVwp6KxcFw4NTM-IAmmVd5qedJrdoKOaKBz1Td6iRwRek7vIQ6yW4pT2JiZcfJ')
 
-const url = urls[getRandomIntInclusive(0, urls.length - 1)];
+// const url = urls[getRandomIntInclusive(0, urls.length - 1)];
 const maxViews = (totalAmount * 1000) / CPM;
+
+let index = 0;
+const getUrl = () => {
+  let url = urls[index];
+
+  if (!url) {
+    index = 0;
+    url = urls[0]
+  }
+  console.log({index, url})
+  index++;
+  return url;
+}
 
 (async () => {
   const cluster = await Cluster.launch({
@@ -46,7 +59,7 @@ const maxViews = (totalAmount * 1000) / CPM;
     puppeteer,
     puppeteerOptions: {
       headless: true,
-      executablePath: '/home/ubuntu/ttBot/ungoogled-chromium_86.0.4240.111_1.vaapi_linux/chrome',
+      executablePath: '/usr/bin/chromium-browser',
       // executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',
       // executablePath: 'C:/Users/User/Desktop/Twitch/Chromium/bin/chrome.exe',
       // headless: true,
@@ -140,7 +153,8 @@ const maxViews = (totalAmount * 1000) / CPM;
 
   let alreadyQueued = 0;
   while (alreadyQueued < maxViews) {
-    cluster.queue(url);
+    const site = getUrl()
+    cluster.queue(site);
     alreadyQueued += 1;
   }
 
