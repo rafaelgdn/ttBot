@@ -32,6 +32,7 @@ const {
 // const url = urls[getRandomIntInclusive(0, urls.length - 1)];
 const maxViews = (totalAmount * 1000) / CPM;
 
+let views = 0;
 let index = 0;
 const getUrl = () => {
   let url = urls[index];
@@ -57,7 +58,8 @@ const getUrl = () => {
     puppeteer,
     puppeteerOptions: {
       headless: true,
-      executablePath: '/home/ubuntu/ungoogled-chromium_92.0.4515.159_1.vaapi_linux/chrome',
+      executablePath: '/usr/bin/google-chrome-stable',
+      // executablePath: '/home/ubuntu/ungoogled-chromium_92.0.4515.159_1.vaapi_linux/chrome',
       // executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',
       // executablePath: 'C:/Users/User/Desktop/Twitch/Chromium/bin/chrome.exe',
       // headless: true,
@@ -124,6 +126,7 @@ const getUrl = () => {
     );
 
     console.log('\nSUCCESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS !!!\n')
+    views += 1;
 
     await page.close();
   });
@@ -137,9 +140,9 @@ const getUrl = () => {
 
   setInterval(async () => {
     cluster.monitor()
-    const hook = new Webhook('https://discordapp.com/api/webhooks/879032127767859220/bFUJlGkVwp6KxcFw4NTM-IAmmVd5qedJrdoKOaKBz1Td6iRwRek7vIQ6yW4pT2JiZcfJ')
+    const hook = new Webhook('https://discordapp.com/api/webhooks/879508980018319410/01X4-fuIOKYbee9-CflKUIeQzdTh9Lcyh83oL-Xvvajj2m5F8glO29nfKKUV4h-i10nF')
     hook.setUsername('Oracle Instance')
-    hook.send(`${cluster.webhookMsg}`);
+    hook.send(`${cluster.webhookMsg}\nViews: ${views}`);
   }, 60 * 1000);
 
   await cluster.idle();
