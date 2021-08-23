@@ -42,7 +42,7 @@ const getUrl = () => {
     index = 0;
     url = urls[0]
   }
-  console.log({index, url})
+
   index++;
   return url;
 }
@@ -59,7 +59,7 @@ const getUrl = () => {
     puppeteer,
     puppeteerOptions: {
       headless: true,
-      executablePath: '/usr/bin/chromium-browser',
+      executablePath: '/snap/bin/chromium',
       // executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',
       // executablePath: 'C:/Users/User/Desktop/Twitch/Chromium/bin/chrome.exe',
       // headless: true,
