@@ -123,6 +123,8 @@ const getUrl = () => {
       getRandomIntInclusive(3000, 5000),
     );
 
+    console.log('SUCCESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS')
+
     await page.close();
   });
 
