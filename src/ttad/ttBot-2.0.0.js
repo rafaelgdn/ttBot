@@ -69,10 +69,8 @@ const getUrl = () => {
   });
 
   await cluster.task(async ({ page, data: uri }) => {
-    console.log('\n\n\n\n11111111111111111111\n\n\n')
     const userAgent = userAgents[getRandomIntInclusive(0, userAgents.length - 1)];
     await page.setUserAgent(userAgent);
-    console.log('\n\n\n\n2222222222222222\n\n\n')
 
     // Deal with twitch cookies and unnecessary contests
     const client = await page.target().createCDPSession();
@@ -106,9 +104,7 @@ const getUrl = () => {
     // ///////////////////////////////////////
 
     // set cookies to mute audio and accept mature content
-    console.log('\n\n\n\n333333333333333333\n\n\n')
     await page.goto('https://www.twitch.tv/');
-    console.log('\n\n\n\n44444444444444444444\n\n\n')
     await page.evaluate(() => {
       localStorage.setItem('mature', 'true');
       localStorage.setItem('video-muted', '{"default":false}');
@@ -116,7 +112,6 @@ const getUrl = () => {
       localStorage.setItem('video-quality', '{"default":"160p30"}');
     });
     // /////////////////////////////////////////////////
-    console.log('\n\n\n\n55555555555555555551\n\n\n')
     await page.goto(uri);
     console.log('\nWaiting for selector\n')
     await page.waitForSelector(AdSadOverlay, { timeout: 10000 });
