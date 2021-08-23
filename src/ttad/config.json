@@ -1,5 +1,5 @@
 {
-  "concurrency": 10,
+  "concurrency": 1,
   "totalAmount": 10,
   "CPM": 3.5,
   "urls": [
