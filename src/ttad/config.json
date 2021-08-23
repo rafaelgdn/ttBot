@@ -1,8 +1,11 @@
 {
   "concurrency": 10,
-  "totalAmount": 10,
+  "totalAmount": 100,
   "CPM": 3.5,
   "urls": [
-    "https://www.twitch.tv/faah"
+    "https://www.twitch.tv/videos/1127162364",
+    "https://www.twitch.tv/videos/1126988464",
+    "https://www.twitch.tv/videos/1126503736",
+    "https://www.twitch.tv/videos/1125711724"
   ]
 }

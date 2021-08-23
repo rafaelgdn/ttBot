@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 // const { Cluster } = require('../cluster/dist/index');
-const { Cluster } = require('puppeteer-cluster')
+const { Cluster } = require('../cluster/dist/index')
 const { Webhook } = require('discord-webhook-node')
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
@@ -113,17 +113,17 @@ const getUrl = () => {
     });
     // /////////////////////////////////////////////////
     await page.goto(uri);
-    console.log('\nWaiting for selector\n')
+    console.log('Waiting for selector...')
     await page.waitForSelector(AdSadOverlay, { timeout: 10000 });
-    console.log('\nFound selector\n')
+    console.log('Found selector...')
     await page.waitForSelector(AdSadOverlay, { hidden: true, timeout: 181000 });
-    console.log('\nWainting selector disapear\n')
+    console.log('Wainting selector disapear...')
 
     await sleep(
       getRandomIntInclusive(3000, 5000),
     );
 
-    console.log('\nSUCCESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS\n')
+    console.log('\nSUCCESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS !!!\n')
 
     await page.close();
   });
@@ -135,11 +135,12 @@ const getUrl = () => {
     alreadyQueued += 1;
   }
 
-  // setInterval(() => {
-  //   cluster.monitor()
-  //   // const hook = new Webhook('https://discordapp.com/api/webhooks/879032127767859220/bFUJlGkVwp6KxcFw4NTM-IAmmVd5qedJrdoKOaKBz1Td6iRwRek7vIQ6yW4pT2JiZcfJ')
-  //   // hook.send(cluster.webhookMsg);
-  // }, 60 * 1000);
+  setInterval(async () => {
+    cluster.monitor()
+    const hook = new Webhook('https://discordapp.com/api/webhooks/879032127767859220/bFUJlGkVwp6KxcFw4NTM-IAmmVd5qedJrdoKOaKBz1Td6iRwRek7vIQ6yW4pT2JiZcfJ')
+    hook.setUsername('Oracle Instance')
+    hook.send(`${cluster.webhookMsg}`);
+  }, 60 * 1000);
 
   await cluster.idle();
   await cluster.close();
