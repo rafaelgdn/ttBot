@@ -117,9 +117,12 @@ const getUrl = () => {
     await page.goto(uri);
     console.log('Waiting for selector...')
     await page.waitForSelector('[data-a-target="video-player"]')
+    console.log('Passou do waitForSelector')
     await page.mouse.click(240, 50, { clickCount: 2 });
+    console.log('clicouuuu')
     views += 1;
     await page.screenshot({ path: `screenshot${views}.png` } )
+    console.log('tirou screenshot')
     await page.waitForSelector(AdSadOverlay, { timeout: 10000 });
     console.log('Found selector...')
     await page.waitForSelector(AdSadOverlay, { hidden: true, timeout: 181000 });
