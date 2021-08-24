@@ -227,13 +227,15 @@ const main = async () => {
   let browser;
 
   try {
+    console.log('entrou no main')
     browser = await puppeteer.launch({
       headless: true,
       // executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe'
       executablePath: '/usr/bin/google-chrome-stable',
     });
-
+    console.log('abriu browser')
     const page = await browser.newPage();
+    console.log('abriu page')
     await handlePage(page);
     await browser.close();
     active -= 1;
