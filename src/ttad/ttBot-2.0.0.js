@@ -58,7 +58,7 @@ const getUrl = () => {
     puppeteer,
     puppeteerOptions: {
       headless: true,
-      executablePath: '/usr/bin/google-chrome',
+      executablePath: '/home/rafaeldecarvalho_ps/ungoogled-chromium_92.0.4515.159_1.vaapi_linux/chrome',
       // executablePath: '/home/ubuntu/ungoogled-chromium_92.0.4515.159_1.vaapi_linux/chrome',
       // executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',
       // executablePath: 'C:/Users/User/Desktop/Twitch/Chromium/bin/chrome.exe',
