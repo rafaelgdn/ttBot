@@ -231,7 +231,7 @@ const main = async () => {
     browser = await puppeteer.launch({
       headless: true,
       // executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe'
-      executablePath: '/usr/bin/google-chrome',
+      executablePath: '/home/rafaeldecarvalho_ps/ungoogled-chromium_92.0.4515.159_1.vaapi_linux/chrome',
     });
     console.log('abriu browser')
     const page = await browser.newPage();
