@@ -76,46 +76,51 @@ const getUrl = () => {
     await page.setUserAgent(userAgent);
 
     // Deal with twitch cookies and unnecessary contests
-    const client = await page.target().createCDPSession();
+    // const client = await page.target().createCDPSession();
 
-    await client.send('Network.enable');
-    await client.send('Network.setRequestInterception', {
-      patterns: [{
-        urlPattern: '*',
-      }],
-    });
+    // await client.send('Network.enable');
+    // await client.send('Network.setRequestInterception', {
+    //   patterns: [{
+    //     urlPattern: '*',
+    //   }],
+    // });
 
-    client.on('Network.requestIntercepted', async ({
-      interceptionId,
-      request: httpRequest,
-      resourceType,
-    }) => {
-      const continueParams = { interceptionId };
-      const requestUrl = httpRequest.url.split('?')[0].split('#')[0];
+    // client.on('Network.requestIntercepted', async ({
+    //   interceptionId,
+    //   request: httpRequest,
+    //   resourceType,
+    // }) => {
+    //   const continueParams = { interceptionId };
+    //   const requestUrl = httpRequest.url.split('?')[0].split('#')[0];
 
-      if (httpRequest.url === 'https://www.twitch.tv/') {
-        continueParams.rawResponse = 'eyBzdGF0dXM6IDIwMCwgY29udGVudFR5cGU6ICd0ZXh0L3BsYWluJywgYm9keTogJzxodG0nICB9';
-      } else if (
-        blockedResourceTypes.indexOf(resourceType) !== -1
-      || skippedResources.some((resource) => requestUrl.indexOf(resource) !== -1)
-      ) {
-        continueParams.errorReason = 'AddressUnreachable';
-      }
-      client.send('Network.continueInterceptedRequest', continueParams)
-        .catch(() => null);
-    });
-    // ///////////////////////////////////////
+    //   if (httpRequest.url === 'https://www.twitch.tv/') {
+    //     continueParams.rawResponse = 'eyBzdGF0dXM6IDIwMCwgY29udGVudFR5cGU6ICd0ZXh0L3BsYWluJywgYm9keTogJzxodG0nICB9';
+    //   } else if (
+    //     blockedResourceTypes.indexOf(resourceType) !== -1
+    //   || skippedResources.some((resource) => requestUrl.indexOf(resource) !== -1)
+    //   ) {
+    //     continueParams.errorReason = 'AddressUnreachable';
+    //   }
+    //   client.send('Network.continueInterceptedRequest', continueParams)
+    //     .catch(() => null);
+    // });
+    // // ///////////////////////////////////////
 
-    // set cookies to mute audio and accept mature content
-    await page.goto('https://www.twitch.tv/');
-    await page.evaluate(() => {
-      localStorage.setItem('mature', 'true');
-      localStorage.setItem('video-muted', '{"default":false}');
-      localStorage.setItem('volume', '0.5');
-      localStorage.setItem('video-quality', '{"default":"160p30"}');
-    });
+    // // set cookies to mute audio and accept mature content
+    // await page.goto('https://www.twitch.tv/');
+    // await page.evaluate(() => {
+    //   localStorage.setItem('mature', 'true');
+    //   localStorage.setItem('video-muted', '{"default":false}');
+    //   localStorage.setItem('volume', '0.5');
+    //   localStorage.setItem('video-quality', '{"default":"160p30"}');
+    // });
     // /////////////////////////////////////////////////
     await page.goto(uri);
+    await page.waitForSelector('[data-a-target="player-overlay-mature-accept"]')
+    await page.screenshot({ path: `screenshot-mature${views}.png` } )
+    await page.evaluate(() => {
+      document.querySelector('[data-a-target="player-overlay-mature-accept"]').click();
+    });
     console.log('Waiting for selector...')
     await page.screenshot({ path: `screenshot-apos-goto${views}.png` } )
     await page.waitForSelector('[data-a-target="video-player"]')
