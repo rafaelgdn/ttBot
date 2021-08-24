@@ -50,8 +50,8 @@ const getUrl = () => {
   const cluster = await Cluster.launch({
     concurrency: Cluster.CONCURRENCY_CONTEXT,
     maxConcurrency: concurrency,
-    // workerCreationDelay: 5000,
-    sameDomainDelay: 2000,
+    workerCreationDelay: 5000,
+    // sameDomainDelay: 2000,
     timeout: 200000,
     retryLimit: 1000,
     monitor: false,
