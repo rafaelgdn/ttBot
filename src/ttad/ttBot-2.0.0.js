@@ -58,7 +58,7 @@ const getUrl = () => {
     puppeteer,
     puppeteerOptions: {
       headless: true,
-      executablePath: '/usr/bin/google-chrome-stable',
+      executablePath: '/usr/bin/google-chrome',
       // executablePath: '/home/ubuntu/ungoogled-chromium_92.0.4515.159_1.vaapi_linux/chrome',
       // executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',
       // executablePath: 'C:/Users/User/Desktop/Twitch/Chromium/bin/chrome.exe',
@@ -142,7 +142,7 @@ const getUrl = () => {
     cluster.monitor()
     const hook = new Webhook('https://discordapp.com/api/webhooks/879508980018319410/01X4-fuIOKYbee9-CflKUIeQzdTh9Lcyh83oL-Xvvajj2m5F8glO29nfKKUV4h-i10nF')
     hook.setUsername('Oracle Instance')
-    hook.send(`${cluster.webhookMsg}\nViews: ${views}`);
+    hook.send(`${cluster.webhookMsg}\nViews: ${views}` + '```');
   }, 60 * 1000);
 
   await cluster.idle();
