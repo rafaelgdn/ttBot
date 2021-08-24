@@ -116,8 +116,9 @@ const getUrl = () => {
     // /////////////////////////////////////////////////
     await page.goto(uri);
     console.log('Waiting for selector...')
-    await sleep(5000)
-    await page.screenshot({ path: `screenshot${index}.png` } )
+    await sleep(20000)
+    views += 1;
+    await page.screenshot({ path: `screenshot${views}.png` } )
     await page.waitForSelector(AdSadOverlay, { timeout: 10000 });
     console.log('Found selector...')
     await page.waitForSelector(AdSadOverlay, { hidden: true, timeout: 181000 });
@@ -128,7 +129,7 @@ const getUrl = () => {
     );
 
     console.log('\nSUCCESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS !!!\n')
-    views += 1;
+    
 
     await page.close();
   });
