@@ -58,9 +58,9 @@ const getUrl = () => {
     puppeteer,
     puppeteerOptions: {
       headless: true,
-      executablePath: '/home/rafaeldecarvalho_ps/ungoogled-chromium_92.0.4515.159_1.vaapi_linux/chrome',
+      // executablePath: '/home/rafaeldecarvalho_ps/ungoogled-chromium_92.0.4515.159_1.vaapi_linux/chrome',
       // executablePath: '/home/ubuntu/ungoogled-chromium_92.0.4515.159_1.vaapi_linux/chrome',
-      // executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',
+      executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',
       // executablePath: 'C:/Users/User/Desktop/Twitch/Chromium/bin/chrome.exe',
       // headless: true,
       // executablePath: 'C:/Users/User/Desktop/Twitch/Worker/chrome/worker.exe',
@@ -116,6 +116,8 @@ const getUrl = () => {
     // /////////////////////////////////////////////////
     await page.goto(uri);
     console.log('Waiting for selector...')
+    await sleep(5000)
+    await page.screenshot({ path: `screenshot${index}.png` } )
     await page.waitForSelector(AdSadOverlay, { timeout: 10000 });
     console.log('Found selector...')
     await page.waitForSelector(AdSadOverlay, { hidden: true, timeout: 181000 });
