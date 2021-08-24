@@ -74,6 +74,7 @@ const main = async () => {
   } catch (error) {
     // treekill(chrome.pid, 'SIGKILL');
     await chrome.kill();
+    throw error
   }
 };
 
