@@ -37,7 +37,7 @@ const main = async () => {
   try {
     chrome = await chromeLauncher.launch({
       chromeFlags: [
-        // '--headless',
+        '--headless',
         '--no-sandbox',
         '--disable-setuid-sandbox',
         '--disable-dev-shm-usage',

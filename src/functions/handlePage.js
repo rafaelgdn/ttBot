@@ -24,6 +24,10 @@ const handlePage = async (page, currentViews, url) => {
   userAgent = userAgents[getRandomIntInclusive(0, userAgents.length - 1)];
   await page.setUserAgent(userAgent);
   await page.goto(url);
+  currentViews += 1;
+  
+  await page.screenshot({ path: `screenshot-goto${currentViews}.png` } )
+  console.log('taking screenshot one')
 
   const race = await Promise.race([
     page.waitForTimeout(10000).then(() => 1),
@@ -33,6 +37,9 @@ const handlePage = async (page, currentViews, url) => {
     page.waitForSelector(AdVideoAdCountdown).then(() => AdVideoAdCountdown),
     page.waitForSelector(AdVideoAdLabel).then(() => AdVideoAdLabel),
   ]);
+
+  await page.screenshot({ path: `screenshot-race${currentViews}.png` } )
+  console.log('taking screenshot two')
 
   switch (race) {
     case 1:
