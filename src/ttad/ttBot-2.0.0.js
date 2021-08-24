@@ -29,7 +29,6 @@ const {
   getRandomIntInclusive,
   sleep,
 } = require('../utils');
-const { default: axios } = require('axios');
 
 // const url = urls[getRandomIntInclusive(0, urls.length - 1)];
 const maxViews = (totalAmount * 1000) / CPM;
