@@ -4,7 +4,7 @@
 /* eslint-disable no-constant-condition */
 /* eslint-disable max-len */
 /* eslint-disable no-console */
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-extra');
 
 const {
   userAgents,
