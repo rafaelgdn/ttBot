@@ -16,7 +16,7 @@ const {
   totalAmount,
   CPM,
   urls,
-} = require('./config.json');
+} = require('./configs/config.json');
 
 const url = urls[getRandomIntInclusive(0, urls.length - 1)];
 const total = (totalAmount * 1000) / CPM;
@@ -229,7 +229,7 @@ const main = async () => {
   try {
     browser = await puppeteer.launch({
       headless: false,
-      executablePath: 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe',
+      executablePath: '/usr/bin/google-chrome-stable',
     });
 
     const page = await browser.newPage();
