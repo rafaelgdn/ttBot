@@ -1,10 +1,9 @@
 /* eslint-disable no-console */
 // const { Cluster } = require('../cluster/dist/index');
 const { Cluster } = require('../cluster/dist/index')
-const { Webhook } = require('discord-webhook-node')
+const { Webhook, MessageBuilder } = require('discord-webhook-node')
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
-const axios = require('axios')
 
 puppeteer.use(StealthPlugin());
 
@@ -141,16 +140,9 @@ const getUrl = () => {
 
   setInterval(async () => {
     cluster.monitor()
-    await axios.post('https://discordapp.com/api/webhooks/879508980018319410/01X4-fuIOKYbee9-CflKUIeQzdTh9Lcyh83oL-Xvvajj2m5F8glO29nfKKUV4h-i10nF', {
-      embeds: [{
-        title: 'Oracle AD Report',
-        color: '88245227',
-        author: {
-          name: 'Oracle Instance'
-        },
-        description: `${cluster.webhookMsg}\nViews: ${views}` + '```',
-      }]
-    })
+    const hook = new Webhook('https://discordapp.com/api/webhooks/879508980018319410/01X4-fuIOKYbee9-CflKUIeQzdTh9Lcyh83oL-Xvvajj2m5F8glO29nfKKUV4h-i10nF');
+    hook.setUsername('GdN-');
+    hook.send(`${cluster.webhookMsg}\nViews: ${views}` + '```')
   }, 60 * 1000);
 
   await cluster.idle();

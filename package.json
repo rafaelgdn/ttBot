@@ -14,6 +14,7 @@
     "chrome-launcher": "^0.14.0",
     "debug": "^4.1.1",
     "discord-webhook-node": "^1.1.8",
+    "discord.js": "^13.1.0",
     "os-utils": "0.0.14",
     "puppeteer-cluster": "^0.22.0",
     "puppeteer-core": "^10.2.0",
