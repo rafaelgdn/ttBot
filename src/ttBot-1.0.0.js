@@ -79,6 +79,10 @@ const main = async () => {
 };
 
 const loop = async () => {
+  console.log({concurrency,
+    totalAmount,
+    CPM,
+    urls})
   if (currentViews >= maxViews) return;
 
   if (active < concurrency) {

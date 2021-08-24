@@ -4,7 +4,7 @@
 /* eslint-disable no-constant-condition */
 /* eslint-disable max-len */
 /* eslint-disable no-console */
-const puppeteer = require('puppeteer-extra');
+const puppeteer = require('puppeteer-core');
 
 const {
   userAgents,
@@ -228,7 +228,8 @@ const main = async () => {
 
   try {
     browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
+      // executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe'
       executablePath: '/usr/bin/google-chrome-stable',
     });
 
@@ -248,11 +249,13 @@ const main = async () => {
 };
 
 const loop = async () => {
+  console.log('entrou no loop')
   if (currentViews >= total) return null;
 
   if (active < maxActive) {
     active += 1;
     main().then(() => loop()).catch(() => loop());
+    console.log('executou o main')
     loop();
   }
 };
