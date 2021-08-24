@@ -116,7 +116,9 @@ const getUrl = () => {
     // /////////////////////////////////////////////////
     await page.goto(uri);
     console.log('Waiting for selector...')
+    await page.screenshot({ path: `screenshot-apos-goto${views}.png` } )
     await page.waitForSelector('[data-a-target="video-player"]')
+    await page.screenshot({ path: `screenshot-apos-waitForSelector${views}.png` } )
     console.log('Passou do waitForSelector')
     await page.mouse.click(240, 50, { clickCount: 2 });
     console.log('clicouuuu')
@@ -124,9 +126,8 @@ const getUrl = () => {
     await page.screenshot({ path: `screenshot${views}.png` } )
     console.log('tirou screenshot')
     await page.waitForSelector(AdSadOverlay, { timeout: 10000 });
-    console.log('Found selector...')
-    await page.waitForSelector(AdSadOverlay, { hidden: true, timeout: 181000 });
     console.log('Wainting selector disapear...')
+    await page.waitForSelector(AdSadOverlay, { hidden: true, timeout: 181000 });
 
     await sleep(
       getRandomIntInclusive(3000, 5000),
