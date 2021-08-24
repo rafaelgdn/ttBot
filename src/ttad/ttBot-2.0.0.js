@@ -116,7 +116,7 @@ const getUrl = () => {
     // /////////////////////////////////////////////////
     await page.goto(uri);
     console.log('Waiting for selector...')
-    await page.waitForSelector('.Layout-sc-nxg1ff-0 > .Layout-sc-nxg1ff-0 > .Layout-sc-nxg1ff-0:nth-child(5) > .Layout-sc-nxg1ff-0 > .InjectLayout-sc-588ddc-0')
+    await page.waitForSelector('[data-a-target="video-player"]')
     await page.mouse.click(240, 50, { clickCount: 2 });
     views += 1;
     await page.screenshot({ path: `screenshot${views}.png` } )
