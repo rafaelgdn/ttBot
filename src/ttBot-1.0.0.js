@@ -49,11 +49,12 @@ const main = async () => {
       logLevel: 'silent',
       output: 'json',
     });
-
+    console.log('chrome started...')
     const resp = await promisify(request)(`http://localhost:${chrome.port}/json/version`);
     const { webSocketDebuggerUrl } = JSON.parse(resp.body);
 
     browser = await puppeteer.connect({ browserWSEndpoint: webSocketDebuggerUrl });
+    console.log('puppeteer connected...')
     await setDomainLocalStorage(browser);
 
     const page = await browser.newPage();
