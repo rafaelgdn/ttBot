@@ -411,12 +411,12 @@ class Cluster extends events_1.EventEmitter {
                     workerUrl = 'NO TARGET (should not be happening)';
                 }
             }
-            display.log(`   #${i} ${workOrIdle} ${workerUrl}`);
-            this.webhookMsg += `   #${i} ${workOrIdle} ${workerUrl}\n` // ${i === this.workers.length - 1 ? '```' : ''}`
+            // display.log(`   #${i} ${workOrIdle} ${workerUrl}`);
+            // this.webhookMsg += `   #${i} ${workOrIdle} ${workerUrl}\n` // ${i === this.workers.length - 1 ? '```' : ''}`
         });
         for (let i = 0; i < this.workersStarting; i += 1) {
-            display.log(`   #${this.workers.length + i} STARTING...`);
-            this.webhookMsg += `   #${this.workers.length + i} STARTING...\n`;
+            // display.log(`   #${this.workers.length + i} STARTING...`);
+            // this.webhookMsg += `   #${this.workers.length + i} STARTING...\n`;
         }
         display.resetCursor();
         // this.webhookMsg = `== Start:     ${util.formatDateTime(this.startTime)}\n== Now:       ${util.formatDateTime(now)} (running for ${timeRunning})\n== Progress:  ${doneTargets} / ${this.allTargetCount} (${donePercStr}%), errors: ${this.errorCount} (${errorPerc}%)\n== Remaining: ${timeRemining} (@ ${pagesPerSecond} pages/second)\n== Sys. load: ${cpuUsage}% CPU / ${memoryUsage}% memory\n== Workers:   ${this.workers.length + this.workersStarting}\n   #${i} ${workOrIdle} ${workerUrl}\n${logWorkers}`
