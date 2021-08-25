@@ -142,7 +142,6 @@ const getUrl = () => {
       json: true,
       body: {
         embeds: [{
-          title: 'Advertising progress report',
           description: '```\n' + `${cluster.webhookMsg}` + '\n```',
           color: 4587497,
           author: {
@@ -161,7 +160,7 @@ const getUrl = () => {
     // const hook = new Webhook('https://discordapp.com/api/webhooks/879508980018319410/01X4-fuIOKYbee9-CflKUIeQzdTh9Lcyh83oL-Xvvajj2m5F8glO29nfKKUV4h-i10nF');   
     // hook.setUsername('GdN-');
     // hook.send(`${cluster.webhookMsg}` + '```')
-  }, 60 * 1000);
+  }, 30 * 60 * 1000);
 
   await cluster.idle();
   await cluster.close();
