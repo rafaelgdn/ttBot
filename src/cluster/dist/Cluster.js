@@ -379,21 +379,21 @@ class Cluster extends events_1.EventEmitter {
         const memoryUsage = this.systemMonitor.getMemoryUsage().toFixed(1);
         const pagesPerSecond = doneTargets === 0 ?
             '0' : (doneTargets * 1000 / timeDiff).toFixed(2);
-        // display.log(`== Start:     ${util.formatDateTime(this.startTime)}`);
+        display.log(`== Start:     ${util.formatDateTime(this.startTime)}`);
         this.webhookMsg = '\n\n**Google Cloud E2 instance**\n';
         this.webhookMsg += '```\n';
         this.webhookMsg += `== Start:     ${util.formatDateTime(this.startTime)}\n`;
-        // display.log(`== Now:       ${util.formatDateTime(now)} (running for ${timeRunning})`);
+        display.log(`== Now:       ${util.formatDateTime(now)} (running for ${timeRunning})`);
         this.webhookMsg += `== Now:       ${util.formatDateTime(now)} (running for ${timeRunning})\n`;
-        // display.log(`== Progress:  ${doneTargets} / ${this.allTargetCount} (${donePercStr}%)`
-            // + `, errors: ${this.errorCount} (${errorPerc}%)`);
+        display.log(`== Progress:  ${doneTargets} / ${this.allTargetCount} (${donePercStr}%)`
+            + `, errors: ${this.errorCount} (${errorPerc}%)`);
         this.webhookMsg += `== Progress:  ${doneTargets} / ${this.allTargetCount} (${donePercStr}%)`
         + `, errors: ${this.errorCount} (${errorPerc}%)\n`;
-        // display.log(`== Remaining: ${timeRemining} (@ ${pagesPerSecond} pages/second)`);
+        display.log(`== Remaining: ${timeRemining} (@ ${pagesPerSecond} pages/second)`);
         this.webhookMsg += `== Remaining: ${timeRemining} (@ ${pagesPerSecond} pages/second)\n`;
-        // display.log(`== Sys. load: ${cpuUsage}% CPU / ${memoryUsage}% memory`);
+        display.log(`== Sys. load: ${cpuUsage}% CPU / ${memoryUsage}% memory`);
         this.webhookMsg += `== Sys. load: ${cpuUsage}% CPU / ${memoryUsage}% memory\n`;
-        // display.log(`== Workers:   ${this.workers.length + this.workersStarting}`);
+        display.log(`== Workers:   ${this.workers.length + this.workersStarting}`);
         this.webhookMsg += `== Workers:   ${this.workers.length + this.workersStarting}\n`;
         this.workers.forEach((worker, i) => {
             const isIdle = this.workersAvail.indexOf(worker) !== -1;
@@ -411,11 +411,11 @@ class Cluster extends events_1.EventEmitter {
                     workerUrl = 'NO TARGET (should not be happening)';
                 }
             }
-            // display.log(`   #${i} ${workOrIdle} ${workerUrl}`);
+            display.log(`   #${i} ${workOrIdle} ${workerUrl}`);
             this.webhookMsg += `   #${i} ${workOrIdle} ${workerUrl}\n` // ${i === this.workers.length - 1 ? '```' : ''}`
         });
         for (let i = 0; i < this.workersStarting; i += 1) {
-            // display.log(`   #${this.workers.length + i} STARTING...`);
+            display.log(`   #${this.workers.length + i} STARTING...`);
             this.webhookMsg += `   #${this.workers.length + i} STARTING...\n`;
         }
         display.resetCursor();
