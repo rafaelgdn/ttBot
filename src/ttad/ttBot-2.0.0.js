@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
 // const { Cluster } = require('../cluster/dist/index');
 const { Cluster } = require('../cluster/dist/index')
-const { Webhook, MessageBuilder } = require('discord-webhook-node')
+// const { Webhook, MessageBuilder } = require('discord-webhook-node')
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+const rp = require('request-promise');
 
 puppeteer.use(StealthPlugin());
 
@@ -133,10 +134,34 @@ const getUrl = () => {
 
   setInterval(async () => {
     cluster.monitor()
-    const hook = new Webhook('https://discordapp.com/api/webhooks/879508980018319410/01X4-fuIOKYbee9-CflKUIeQzdTh9Lcyh83oL-Xvvajj2m5F8glO29nfKKUV4h-i10nF');
-    hook.setUsername('GdN-');
-    hook.send(`${cluster.webhookMsg}` + '```')
-  }, 60 * 1000);
+
+    const options = {
+      method: 'POST',
+      uri: 'https://discordapp.com/api/webhooks/879508980018319410/01X4-fuIOKYbee9-CflKUIeQzdTh9Lcyh83oL-Xvvajj2m5F8glO29nfKKUV4h-i10nF',
+      encoding: 'latin1',
+      json: true,
+      body: {
+        embeds: [{
+          title: 'Advertising progress report',
+          description: '```\n' + `${cluster.webhookMsg}` + '\n```',
+          color: 4587497,
+          author: {
+            name: 'Google Cloud Instance',
+            icon_url: 'https://e7.pngegg.com/pngimages/337/722/png-clipart-google-search-google-account-google-s-google-play-google-company-text.png'
+          }
+        }],
+      },
+    };
+
+    await rp(options)
+
+
+
+
+    // const hook = new Webhook('https://discordapp.com/api/webhooks/879508980018319410/01X4-fuIOKYbee9-CflKUIeQzdTh9Lcyh83oL-Xvvajj2m5F8glO29nfKKUV4h-i10nF');   
+    // hook.setUsername('GdN-');
+    // hook.send(`${cluster.webhookMsg}` + '```')
+  }, 1 * 1000);
 
   await cluster.idle();
   await cluster.close();

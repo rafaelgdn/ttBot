@@ -380,11 +380,10 @@ class Cluster extends events_1.EventEmitter {
         const pagesPerSecond = doneTargets === 0 ?
             '0' : (doneTargets * 1000 / timeDiff).toFixed(2);
         display.log(`== Start:     ${util.formatDateTime(this.startTime)}`);
-        this.webhookMsg = '\n\n**Google Cloud E2 instance**\n';
-        this.webhookMsg += '```\n';
+        this.webhookMsg = '';
         this.webhookMsg += `== Start:     ${util.formatDateTime(this.startTime)}\n`;
         display.log(`== Now:       ${util.formatDateTime(now)} (running for ${timeRunning})`);
-        this.webhookMsg += `== Now:       ${util.formatDateTime(now)} (running for ${timeRunning})\n`;
+        this.webhookMsg += `== Now:       ${util.formatDateTime(now)} (${timeRunning})\n`;
         display.log(`== Progress:  ${doneTargets} / ${this.allTargetCount} (${donePercStr}%)`
             + `, errors: ${this.errorCount} (${errorPerc}%)`);
         this.webhookMsg += `== Progress:  ${doneTargets} / ${this.allTargetCount} (${donePercStr}%)`
