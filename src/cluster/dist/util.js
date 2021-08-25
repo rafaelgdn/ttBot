@@ -37,10 +37,9 @@ function formatDateTime(datetime) {
     const dateStr = `${date.getFullYear()}`
         + `-${padDate(date.getMonth() + 1, 2)}`
         + `-${padDate(date.getDate(), 2)}`;
-    const timeStr = `${padDate(date.getHours(), 2)}`
+    const timeStr = `${padDate(date.getHours() -3, 2)}`
         + `:${padDate(date.getMinutes(), 2)}`
         + `:${padDate(date.getSeconds(), 2)}`
-        + `.${padDate(date.getMilliseconds(), 3)}`;
     return `${dateStr} ${timeStr}`;
 }
 exports.formatDateTime = formatDateTime;
