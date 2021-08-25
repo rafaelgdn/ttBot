@@ -58,8 +58,7 @@ const getUrl = () => {
     puppeteer,
     puppeteerOptions: {
       headless: true,
-      executablePath: '/usr/bin/chromium-browser',
-      // executablePath: '/home/rafaeldecarvalho_ps/ungoogled-chromium_92.0.4515.159_1.vaapi_linux/chrome',
+      executablePath: '/home/rafaeldecarvalho_ps/ungoogled-chromium_92.0.4515.159_1.vaapi_linux/chrome',
       // executablePath: '/home/ubuntu/ungoogled-chromium_92.0.4515.159_1.vaapi_linux/chrome',
       // executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',
       // executablePath: 'C:/Users/User/Desktop/Twitch/Chromium/bin/chrome.exe',
@@ -116,8 +115,6 @@ const getUrl = () => {
     });
     // /////////////////////////////////////////////////
     await page.goto(uri);
-    await sleep(2000);
-    await page.screenshot({ path: 'screenshot.png' })
     await page.waitForSelector(AdSadOverlay, { timeout: 10000 });
     await page.waitForSelector(AdSadOverlay, { hidden: true, timeout: 181000 });
 
@@ -146,10 +143,10 @@ const getUrl = () => {
       body: {
         embeds: [{
           description: '```\n' + `${cluster.webhookMsg}` + '\n```',
-          color: 16726912,
+          color: 4587497,
           author: {
-            name: 'Oracle Cloud Instance',
-            icon_url: 'https://w7.pngwing.com/pngs/98/646/png-transparent-oracle-corporation-oracle-webcenter-oracle-database-oracle-e-business-suite-oracle-applications-others-text-trademark-logo.png'
+            name: 'Google Cloud Instance',
+            icon_url: 'https://e7.pngegg.com/pngimages/337/722/png-clipart-google-search-google-account-google-s-google-play-google-company-text.png'
           }
         }],
       },
