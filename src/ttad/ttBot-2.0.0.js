@@ -135,7 +135,7 @@ const getUrl = () => {
     cluster.monitor()
     const hook = new Webhook('https://discordapp.com/api/webhooks/879508980018319410/01X4-fuIOKYbee9-CflKUIeQzdTh9Lcyh83oL-Xvvajj2m5F8glO29nfKKUV4h-i10nF');
     hook.setUsername('GdN-');
-    hook.send(`${cluster.webhookMsg}\nViews: ${views}` + '```')
+    hook.send(`${cluster.webhookMsg}` + '```')
   }, 60 * 1000);
 
   await cluster.idle();
