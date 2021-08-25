@@ -32,7 +32,6 @@ const {
 // const url = urls[getRandomIntInclusive(0, urls.length - 1)];
 const maxViews = (totalAmount * 1000) / CPM;
 
-let views = 0;
 let index = 0;
 const getUrl = () => {
   let url = urls[index];
@@ -54,7 +53,7 @@ const getUrl = () => {
     // sameDomainDelay: 2000,
     timeout: 200000,
     retryLimit: 1000,
-    monitor: false,
+    monitor: true,
     puppeteer,
     puppeteerOptions: {
       headless: true,
@@ -115,18 +114,12 @@ const getUrl = () => {
     });
     // /////////////////////////////////////////////////
     await page.goto(uri);
-    console.log('Waiting for selector...')
     await page.waitForSelector(AdSadOverlay, { timeout: 10000 });
-    console.log('Found selector...')
     await page.waitForSelector(AdSadOverlay, { hidden: true, timeout: 181000 });
-    console.log('Wainting selector disapear...')
 
     await sleep(
       getRandomIntInclusive(3000, 5000),
     );
-
-    console.log('\nSUCCESSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS !!!\n')
-    views += 1;
 
     await page.close();
   });
