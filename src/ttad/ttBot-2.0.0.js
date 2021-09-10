@@ -58,14 +58,39 @@ const getUrl = () => {
     puppeteer,
     puppeteerOptions: {
       headless: true,
-      executablePath: '/home/rafaeldecarvalho_ps/ungoogled-chromium_92.0.4515.159_1.vaapi_linux/chrome',
+      executablePath: '/usr/bin/google-chrome',
       // executablePath: '/home/ubuntu/ungoogled-chromium_92.0.4515.159_1.vaapi_linux/chrome',
       // executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe',
       // executablePath: 'C:/Users/User/Desktop/Twitch/Chromium/bin/chrome.exe',
       // headless: true,
       // executablePath: 'C:/Users/User/Desktop/Twitch/Worker/chrome/worker.exe',
       args: [
+        '--disable-client-side-phishing-detection',
+        '--disable-component-extensions-with-background-pages',
+        '--disable-default-apps',
+        '--disable-extensions',
+        '--no-default-browser-check',
+        '--no-first-run',
+        '--allow-running-insecure-content',
+        '--disable-background-timer-throttling',
+        '--disable-backgrounding-occluded-windows',
+        '--disable-features=ScriptStreaming',
+        '--disable-hang-monitor',
+        '--disable-ipc-flooding-protection',
+        '--disable-notifications',
+        '--disable-renderer-backgrounding',
+        '--disable-background-networking',
+        '--disable-breakpad',
+        '--disable-component-update',
+        '--disable-domain-reliability',
+        '--disable-sync',
+        '--use-gl="swiftshader"',
         '--no-sandbox',
+        '--disable-gpu',
+        '--disable-features=Translate,GpuProcessHighPriorityWin,GpuUseDisplayThreadPriority,ExtensionsToolbarMenu',
+        '--disk-cache-size=1',
+        '--disable-gpu-program-cache',
+        '--disable-gpu-shader-disk-cache',
       ],
     },
   });
@@ -145,7 +170,7 @@ const getUrl = () => {
           description: '```\n' + `${cluster.webhookMsg}` + '\n```',
           color: 4587497,
           author: {
-            name: 'Google Cloud Instance',
+            name: 'Google Cloud - Rafa (1)',
             icon_url: 'https://e7.pngegg.com/pngimages/337/722/png-clipart-google-search-google-account-google-s-google-play-google-company-text.png'
           }
         }],
@@ -160,7 +185,7 @@ const getUrl = () => {
     // const hook = new Webhook('https://discordapp.com/api/webhooks/879508980018319410/01X4-fuIOKYbee9-CflKUIeQzdTh9Lcyh83oL-Xvvajj2m5F8glO29nfKKUV4h-i10nF');   
     // hook.setUsername('GdN-');
     // hook.send(`${cluster.webhookMsg}` + '```')
-  }, 30 * 60 * 1000);
+  }, 5 * 60 * 1000);
 
   await cluster.idle();
   await cluster.close();
